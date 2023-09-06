@@ -2,8 +2,8 @@
 
 const canvas = document.getElementById("squareCanvas");
 const ctx = canvas.getContext("2d");
-let raf
-const intervalID = setInterval(draw, 16)
+//let raf
+setInterval(main, 16)
 
 //square #1 object and functions
 
@@ -30,21 +30,55 @@ const square = {
         ctx.beginPath();
         ctx.rect(this.x, this.y, 100, 100, true);
         ctx.stroke();
+    },
+    update(){
+        if (w){
+            moveUp(this)
+        }
+        if (a){
+            moveBackward(this)
+        }
+        if (s){
+            moveDown(this)
+        }
+        if (d){
+            moveForward(this)
+        }
     }
 };
 
+var w = false;
+var a = false;
+var s = false;
+var d = false;
+
 window.addEventListener("keydown", (event) => {
-    if (event.key === "d") {
-        moveForward(square);
-    };
+    if (event.key === "d" || event.key === "ArrowRight") {
+        d = true;
+    }
     if (event.key === "a") {
-        moveBackward(square);
-    };
+        a = true;
+    }
     if (event.key === "w") {
-        moveUp(square);
-    };
+        w = true;
+    }
     if (event.key === "s") {
-        moveDown(square);
+        s = true;
+    };
+    console.log(event.key);
+});
+window.addEventListener("keyup", (event) => {
+    if (event.key === "d") {
+        d = false;
+    }
+    if (event.key === "a") {
+        a = false;
+    }
+    if (event.key === "w") {
+        w = false;
+    }
+    if (event.key === "s") {
+        s = false;
     };
     console.log(event.key);
 });
@@ -100,14 +134,11 @@ const square3 = {
 
 //Draw Phase
 
-function draw() {
+function main() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     square.draw();
     square2.draw();
     square3.draw();
-    raf = window.requestAnimationFrame(draw);
+    square.update();
+    // window.requestAnimationFrame(draw);
 };
-
-square.draw();
-square2.draw();
-square3.draw();

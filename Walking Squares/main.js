@@ -9,7 +9,7 @@ var keys = {
     K_a: false,
     K_s: false,
     K_d: false,
-    K_UP: false,
+    K_Up: false,
     K_Down: false,
     K_Right: false,
     K_Left: false,
@@ -56,7 +56,7 @@ window.onkeydown = function (e) {
         keys['K_d'] = true;
     };
     if (e.key === 'ArrowUp') {
-        keys['K_UP'] = true;
+        keys['K_Up'] = true;
     };
     if (e.key === 'ArrowLeft') {
         keys['K_Left'] = true;
@@ -83,7 +83,7 @@ window.onkeyup = function (e) {
         keys['K_d'] = false;
     };
     if (e.key === 'ArrowUp') {
-        keys['K_UP'] = false;
+        keys['K_Up'] = false;
     };
     if (e.key === 'ArrowLeft') {
         keys['K_Left'] = false;
@@ -100,7 +100,7 @@ window.onkeyup = function (e) {
 }
 
 var square = draw_square('K_w', 'K_a', 'K_s', 'K_d');
-var square2 = draw_square('K_UP', 'K_Left', 'K_Down', 'K_Right');
+var square2 = draw_square('K_Up', 'K_Left', 'K_Down', 'K_Right');
 
 //Draw Phase
 

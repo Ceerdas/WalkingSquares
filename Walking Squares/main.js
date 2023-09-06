@@ -2,143 +2,113 @@
 
 const canvas = document.getElementById("squareCanvas");
 const ctx = canvas.getContext("2d");
-//let raf
 setInterval(main, 16)
 
-//square #1 object and functions
-
-function moveForward(square) {
-    square.x += square.vx;
-};
-function moveBackward(square) {
-    square.x -= square.vx;
-};
-function moveUp(square) {
-    square.y -= square.vy;
-};
-function moveDown(square) {
-    square.y += square.vy;
-};
-
-const square = {
-
-    x: 0,
-    y: 0,
-    vx: 10,
-    vy: 10,
-    draw() {
-        ctx.beginPath();
-        ctx.rect(this.x, this.y, 100, 100, true);
-        ctx.stroke();
-    },
-    update(){
-        if (w){
-            moveUp(this)
+var keys = {
+    K_w: false,
+    K_a: false,
+    K_s: false,
+    K_d: false,
+    K_UP: false,
+    K_Down: false,
+    K_Right: false,
+    K_Left: false,
+}
+function draw_square(up_key_name, left_key_name, down_key_name, right_key_name) {
+    return {
+        x: 0,
+        y: 0,
+        vx: 1,
+        vy: 1,
+        draw() {
+            ctx.beginPath();
+            ctx.rect(this.x, this.y, 100, 100);
+            ctx.stroke();
+        },
+        update() {
+            if (keys[up_key_name]) {
+                this.y -= this.vy;
+            };
+            if (keys[down_key_name]) {
+                this.y += this.vy;
+            };
+            if (keys[right_key_name]) {
+                this.x += this.vx;
+            };
+            if (keys[left_key_name]) {
+                this.x -= this.vx;
+            };
         }
-        if (a){
-            moveBackward(this)
-        }
-        if (s){
-            moveDown(this)
-        }
-        if (d){
-            moveForward(this)
-        }
-    }
-};
-
-var w = false;
-var a = false;
-var s = false;
-var d = false;
-
-window.addEventListener("keydown", (event) => {
-    if (event.key === "d" || event.key === "ArrowRight") {
-        d = true;
-    }
-    if (event.key === "a") {
-        a = true;
-    }
-    if (event.key === "w") {
-        w = true;
-    }
-    if (event.key === "s") {
-        s = true;
     };
-    console.log(event.key);
-});
-window.addEventListener("keyup", (event) => {
-    if (event.key === "d") {
-        d = false;
-    }
-    if (event.key === "a") {
-        a = false;
-    }
-    if (event.key === "w") {
-        w = false;
-    }
-    if (event.key === "s") {
-        s = false;
+};
+
+window.onkeydown = function (e) {
+    if (e.key === 'w') {
+        keys['K_w'] = true;
     };
-    console.log(event.key);
-});
+    if (e.key === 'a') {
+        keys['K_a'] = true;
+    };
+    if (e.key === 's') {
+        keys['K_s'] = true;
+    };
+    if (e.key === 'd') {
+        keys['K_d'] = true;
+    };
+    if (e.key === 'ArrowUp') {
+        keys['K_UP'] = true;
+    };
+    if (e.key === 'ArrowLeft') {
+        keys['K_Left'] = true;
+    };
+    if (e.key === 'ArrowDown') {
+        keys['K_Down'] = true;
+    };
+    if (e.key === 'ArrowRight') {
+        keys['K_Right'] = true;
+    };
+}
 
-// square #2 object and functions
+window.onkeyup = function (e) {
+    if (e.key === 'w') {
+        keys['K_w'] = false;
+    };
+    if (e.key === 'a') {
+        keys['K_a'] = false;
+    };
+    if (e.key === 's') {
+        keys['K_s'] = false;
+    };
+    if (e.key === 'd') {
+        keys['K_d'] = false;
+    };
+    if (e.key === 'ArrowUp') {
+        keys['K_UP'] = false;
+    };
+    if (e.key === 'ArrowLeft') {
+        keys['K_Left'] = false;
+    };
+    if (e.key === 'ArrowDown') {
+        keys['K_Down'] = false;
+    };
+    if (e.key === 'ArrowRight') {
+        keys['K_Right'] = false;
 
-const square2 = {
+        console.log(e);
+        console.log(e.key);
+    };
+}
 
-    x: 100,
-    y: 100,
-    vx: 0,
-    vy: 1,
-    draw() {
-        ctx.beginPath();
-        ctx.rect(this.x, this.y, 100, 100, true);
-        ctx.stroke();
-        square2.x += square2.vx;
-        square2.y += square2.vy;
-    
-        if (square2.y + square2.vy > canvas.height || square2.y + square2.vy < 0) {
-            square2.vy = -square2.vy;
-        }
-        if (square2.x + square2.vx > canvas.width || square2.x + square2.vx < 0){
-            square2.vx = -square2.vx;
-        }
-
-    }
-};
-
-// square #3 object and functions
-
-const square3 = {
-
-    x: 250,
-    y: 250,
-    vx: 1,
-    vy: 0,
-    draw() {
-        ctx.beginPath();
-        ctx.rect(this.x, this.y, 100, 100, true);
-        ctx.stroke();
-        square3.x += square3.vx;
-        square3.y += square3.vy;
-    
-        if (square3.y + square3.vy > canvas.height || square3.y + square3.vy < 0) {
-            square3.vy = -square3.vy;
-        }
-        if (square3.x + square3.vx > canvas.width || square3.x + square3.vx < 0){
-            square3.vx = -square3.vx;
-        }
-    }
-};
+var square = draw_square('K_w', 'K_a', 'K_s', 'K_d');
+var square2 = draw_square('K_UP', 'K_Left', 'K_Down', 'K_Right');
 
 //Draw Phase
 
 function main() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    square.draw();
-    square2.draw();
-    square3.draw();
     square.update();
+    square.draw();
+    square2.update();
+    square2.draw();
     // window.requestAnimationFrame(draw);
 };

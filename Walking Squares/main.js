@@ -90,7 +90,7 @@ const square3 = {
         square3.y += square3.vy;
     
         if (square3.y + square3.vy > canvas.height || square3.y + square3.vy < 0) {
-            square2.vy = -square2.vy;
+            square3.vy = -square3.vy;
         }
         if (square3.x + square3.vx > canvas.width || square3.x + square3.vx < 0){
             square3.vx = -square3.vx;

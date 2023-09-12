@@ -13,7 +13,8 @@ var keys = {
     K_Down: false,
     K_Right: false,
     K_Left: false,
-}
+};
+
 function draw_square(up_key_name, left_key_name, down_key_name, right_key_name) {
     return {
         x: 0,
@@ -41,62 +42,23 @@ function draw_square(up_key_name, left_key_name, down_key_name, right_key_name) 
         }
     };
 };
+var keyDict = {
+    'w': 'K_w', 
+    'a': 'K_a',
+    's': 'K_s',
+    'd': 'K_d',
+    'ArrowUp': 'K_Up',
+    'ArrowLeft': 'K_Left',
+    'ArrowDown': 'K_Down',
+    'ArrowRight': 'K_Right',
+};
 
 window.onkeydown = function (e) {
-    if (e.key === 'w') {
-        keys['K_w'] = true;
-    };
-    if (e.key === 'a') {
-        keys['K_a'] = true;
-    };
-    if (e.key === 's') {
-        keys['K_s'] = true;
-    };
-    if (e.key === 'd') {
-        keys['K_d'] = true;
-    };
-    if (e.key === 'ArrowUp') {
-        keys['K_Up'] = true;
-    };
-    if (e.key === 'ArrowLeft') {
-        keys['K_Left'] = true;
-    };
-    if (e.key === 'ArrowDown') {
-        keys['K_Down'] = true;
-    };
-    if (e.key === 'ArrowRight') {
-        keys['K_Right'] = true;
-    };
-}
+    keys[keyDict[e.key]] = true;
+};
 
 window.onkeyup = function (e) {
-    if (e.key === 'w') {
-        keys['K_w'] = false;
-    };
-    if (e.key === 'a') {
-        keys['K_a'] = false;
-    };
-    if (e.key === 's') {
-        keys['K_s'] = false;
-    };
-    if (e.key === 'd') {
-        keys['K_d'] = false;
-    };
-    if (e.key === 'ArrowUp') {
-        keys['K_Up'] = false;
-    };
-    if (e.key === 'ArrowLeft') {
-        keys['K_Left'] = false;
-    };
-    if (e.key === 'ArrowDown') {
-        keys['K_Down'] = false;
-    };
-    if (e.key === 'ArrowRight') {
-        keys['K_Right'] = false;
-
-        console.log(e);
-        console.log(e.key);
-    };
+    keys[keyDict[e.key]] = false;
 }
 
 var square = draw_square('K_w', 'K_a', 'K_s', 'K_d');
